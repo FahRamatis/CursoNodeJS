@@ -1,19 +1,12 @@
-const express = require('express')
-const app = express()
+const app = require('./config/server')
 
-app.set('view engine', 'ejs')
 
-app.get('/', (req,res) => {
-    res.render('home/index')
-})
-
-app.get('/formulario_inclusao_noticia', (req,res) => {
-    res.render('admin/form_add_noticia')
-})
-
-app.get('/noticias', (req,res) => {
-    res.render('noticias/noticias')
-})
+var rotaHome = require('./app/routes/home')
+rotaHome(app)
+var rotaNoticias = require('./app/routes/noticias')
+rotaNoticias(app)
+var rotaFormularioInclusaoNoticia = require('./app/routes/formulario_inclusao_noticia')
+rotaFormularioInclusaoNoticia(app) 
 const port = 3000
 app.listen(port, () => {
     console.log(`servidor funcionando na porta ${port}`)
